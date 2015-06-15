@@ -35,4 +35,22 @@ class LifeTest < ActiveSupport::TestCase
     assert_equal neighbor, subject.south
     assert_equal subject, neighbor.north
   end
+
+  test 'neighbor to the east' do
+    neighbor = Life.new
+
+    subject.east = neighbor
+
+    assert_equal neighbor, subject.east
+    assert_equal subject, neighbor.west
+  end
+
+  test 'neighbor to the west' do
+    neighbor = Life.new
+
+    subject.west = neighbor
+
+    assert_equal neighbor, subject.west
+    assert_equal subject, neighbor.east
+  end
 end

@@ -8,11 +8,15 @@ class World
 
     north_key = { x: x, y: (y - 1) }
     south_key = { x: x, y: (y + 1) }
+    east_key  = { x: (x + 1), y: y }
+    west_key  = { x: (x - 1), y: y }
 
     life = Life.new
 
     life.north  = @lives[north_key] if @lives.has_key? north_key
     life.south  = @lives[south_key] if @lives.has_key? south_key
+    life.east   = @lives[east_key]  if @lives.has_key? east_key
+    life.west   = @lives[west_key]  if @lives.has_key? west_key
 
     @lives[key] = life
   end

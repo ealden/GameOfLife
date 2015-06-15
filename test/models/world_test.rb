@@ -46,4 +46,18 @@ class WorldTest < ActiveSupport::TestCase
 
     assert_equal expected_survivors, subject.survivors
   end
+
+  test 'we are too many!' do
+    expected_survivors = []
+
+    subject.spawn_life x: 1, y: 0
+    subject.spawn_life x: 0, y: 1
+    subject.spawn_life x: 1, y: 1
+    subject.spawn_life x: 2, y: 1
+    subject.spawn_life x: 1, y: 2
+
+    subject.turn!
+
+    assert_equal expected_survivors, subject.survivors
+  end
 end
