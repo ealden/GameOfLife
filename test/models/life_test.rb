@@ -61,4 +61,38 @@ class LifeTest < ActiveSupport::TestCase
 
     assert subject.survives?
   end
+
+  test 'has neighbors?' do
+    subject.north = Life.new
+
+    assert subject.has_neighbors?
+  end
+
+  test 'no neighbors?' do
+    refute subject.has_neighbors?
+  end
+
+  test 'goes extinct' do
+    north_neighbor  = Life.new
+    south_neighbor  = Life.new
+    east_neighbor   = Life.new
+    west_neighbor   = Life.new
+
+    subject.north = north_neighbor
+    subject.south = south_neighbor
+    subject.east  = east_neighbor
+    subject.west  = west_neighbor
+
+    subject.rip!
+
+    assert_nil north_neighbor.south
+    assert_nil south_neighbor.north
+    assert_nil east_neighbor.west
+    assert_nil west_neighbor.east
+
+    refute north_neighbor.has_neighbors?
+    refute south_neighbor.has_neighbors?
+    refute east_neighbor.has_neighbors?
+    refute west_neighbor.has_neighbors?
+  end
 end

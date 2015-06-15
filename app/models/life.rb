@@ -9,37 +9,57 @@ class Life
     @neighbors == 2 or @neighbors == 3
   end
 
+  def rip!
+    north.south = nil if north
+    south.north = nil if south
+    east.west   = nil if east
+    west.east   = nil if west
+  end
+
+  def has_neighbors?
+    @neighbors > 0
+  end
+
   def north= life
     @north = life
-    life.south = self unless life.south
+    life.south = self unless life.nil? or life.south
 
-    increment_neighbors
+    count_neighbors
   end
 
   def south= life
     @south = life
-    life.north = self unless life.north
+    life.north = self unless life.nil? or life.north
 
-    increment_neighbors
+    count_neighbors
   end
 
   def east= life
     @east = life
-    life.west = self unless life.west
+    life.west = self unless life.nil? or life.west
 
-    increment_neighbors
+    count_neighbors
   end
 
   def west= life
     @west = life
-    life.east = self unless life.east
+    life.east = self unless life.nil? or life.east
 
-    increment_neighbors
+    count_neighbors
   end
 
   private
 
   def increment_neighbors
     @neighbors = @neighbors + 1
+  end
+
+  def count_neighbors
+    @neighbors = 0
+
+    increment_neighbors if north
+    increment_neighbors if south
+    increment_neighbors if east
+    increment_neighbors if west
   end
 end

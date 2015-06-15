@@ -22,7 +22,11 @@ class World
   end
 
   def turn!
+    dead = @lives.reject { |k, v| v.survives? }
+
     @lives.keep_if { |k, v| v.survives? }
+
+    dead.each { |k, v| v.rip! }
   end
 
   def survivors
