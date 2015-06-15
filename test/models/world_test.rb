@@ -12,4 +12,13 @@ class WorldTest < ActiveSupport::TestCase
 
     assert_equal expected_survivors, subject.survivors
   end
+
+  test 'world gone extinct' do
+    expected_survivors = []
+
+    subject.spawn_life x: 0, y: 0
+    subject.turn!
+
+    assert_equal expected_survivors, subject.survivors
+  end
 end
