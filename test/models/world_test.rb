@@ -89,4 +89,24 @@ class WorldTest < ActiveSupport::TestCase
 
     assert_equal expected_survivors, subject.survivors
   end
+
+  test 'live forever' do
+    expected_survivors = [
+      { x: 0, y: 0 },
+      { x: 0, y: 1 },
+      { x: 1, y: 0 },
+      { x: 1, y: 1 }
+    ]
+
+    subject.spawn_life x: 0, y: 0
+    subject.spawn_life x: 0, y: 1
+    subject.spawn_life x: 1, y: 0
+    subject.spawn_life x: 1, y: 1
+
+    subject.turn!
+    subject.turn!
+    subject.turn!
+
+    assert_equal expected_survivors, subject.survivors
+  end
 end
