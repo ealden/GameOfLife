@@ -60,4 +60,19 @@ class WorldTest < ActiveSupport::TestCase
 
     assert_equal expected_survivors, subject.survivors
   end
+
+  test 'three neighbors are still ok' do
+    expected_survivors = [
+      { x: 1, y: 1 }
+    ]
+
+    subject.spawn_life x: 0, y: 1
+    subject.spawn_life x: 1, y: 1
+    subject.spawn_life x: 2, y: 1
+    subject.spawn_life x: 1, y: 2
+
+    subject.turn!
+
+    assert_equal expected_survivors, subject.survivors
+  end
 end

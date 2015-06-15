@@ -6,7 +6,7 @@ class Life
   end
 
   def survives?
-    @neighbors == 2
+    @neighbors == 2 or @neighbors == 3
   end
 
   def north= life

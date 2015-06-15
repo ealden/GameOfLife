@@ -53,4 +53,12 @@ class LifeTest < ActiveSupport::TestCase
     assert_equal neighbor, subject.west
     assert_equal subject, neighbor.east
   end
+
+  test 'three neighbors are still ok' do
+    subject.north = Life.new
+    subject.east  = Life.new
+    subject.west  = Life.new
+
+    assert subject.survives?
+  end
 end
